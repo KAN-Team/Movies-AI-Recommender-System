@@ -5,7 +5,7 @@ An AI Content Based Recommender System recommends movies similar to the movie th
 The details of the movies(`title`, `genre`, `cast`, `crew`, `runtime`, `release_data`, `rating`, `poster`, **etc..**) are fetched using an **API** by **`TMDB`**, https://www.themoviedb.org/documentation/api, and by using the IMDB id of the movie in the **API**, the movie posters are fetched and displayed along with each movie title.
 
 ## Featured by Streamlit Library
-![1](https://user-images.githubusercontent.com/48348589/169431251-c5dce1e5-c094-46f5-97cf-f5aa34c90d4a.png)
+![11](https://user-images.githubusercontent.com/48348589/169676108-bf7df789-bb7f-421e-9d95-4bb7209a80c3.png)
 :---------:
 
 ## Similarity Score
