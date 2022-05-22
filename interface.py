@@ -15,8 +15,8 @@ def get_movie_poster(movie_id):
 # Re-implement the 'recommend' function
 def recommend(movie_name):
     movie_idx = movies[movies['title'] == movie_name].index[0]
-    distances = sim[movie_idx]
-    movies_list = sorted(list(enumerate(distances)), reverse=True, key=lambda i: i[1])[1:11]
+    distances = nlp_model[movie_idx]
+    movies_list = sorted(list(enumerate(distances)), reverse=True, key=lambda i: i[1])[0:11]
     movies_recommended_list = []
     movies_recommended_posters = []
     for movie in movies_list:
@@ -30,7 +30,7 @@ def recommend(movie_name):
 # Loading Movies Data...
 movies_dict = pickle.load(open('movies_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
-sim = pickle.load(open('sim.pkl', 'rb'))
+nlp_model = pickle.load(open('nlp_model.pkl', 'rb'))
 
 # Building Widgets...
 st.set_page_config(layout="wide")
@@ -46,27 +46,11 @@ selected_movie_name = st.selectbox('Pick a Movie to get Similar Movies!', movies
 # Recommend Button
 if st.button('Recommend 10 Similar Movies'):
     names, posters = recommend(selected_movie_name)
+    st.subheader(names[0])
+    st.image(posters[0], width=180)
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        with st.form(key='f0'):
-            st.subheader(names[0])
-            st.image(posters[0])
-            st.form_submit_button("See More")
-        with st.form(key='f3'):
-            st.subheader(names[3])
-            st.image(posters[3])
-            st.form_submit_button("See More")
-        with st.form(key='f6'):
-            st.subheader(names[6])
-            st.image(posters[6])
-            st.form_submit_button("See More")
-        with st.form(key='f9'):
-            st.subheader(names[9])
-            st.image(posters[9])
-            st.form_submit_button("See More")
-
-    with col2:
         with st.form(key='f1'):
             st.subheader(names[1])
             st.image(posters[1])
@@ -79,8 +63,12 @@ if st.button('Recommend 10 Similar Movies'):
             st.subheader(names[7])
             st.image(posters[7])
             st.form_submit_button("See More")
+        with st.form(key='f10'):
+            st.subheader(names[10])
+            st.image(posters[10])
+            st.form_submit_button("See More")
 
-    with col3:
+    with col2:
         with st.form(key='f2'):
             st.subheader(names[2])
             st.image(posters[2])
@@ -92,4 +80,18 @@ if st.button('Recommend 10 Similar Movies'):
         with st.form(key='f8'):
             st.subheader(names[8])
             st.image(posters[8])
+            st.form_submit_button("See More")
+
+    with col3:
+        with st.form(key='f3'):
+            st.subheader(names[3])
+            st.image(posters[3])
+            st.form_submit_button("See More")
+        with st.form(key='f6'):
+            st.subheader(names[6])
+            st.image(posters[6])
+            st.form_submit_button("See More")
+        with st.form(key='f9'):
+            st.subheader(names[9])
+            st.image(posters[9])
             st.form_submit_button("See More")
